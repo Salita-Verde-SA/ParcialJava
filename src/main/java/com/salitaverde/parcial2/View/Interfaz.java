@@ -26,10 +26,10 @@ public class Interfaz extends javax.swing.JFrame {
         IngDni = new javax.swing.JTextField();
         IngPse = new javax.swing.JTextField();
         IngNom = new javax.swing.JTextField();
-        Limpiar = new javax.swing.JButton();
+        Eliminar = new javax.swing.JButton();
         Guardar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,10 +61,10 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        Limpiar.setText("Eliminar");
-        Limpiar.addActionListener(new java.awt.event.ActionListener() {
+        Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LimpiarActionPerformed(evt);
+                EliminarActionPerformed(evt);
             }
         });
 
@@ -77,7 +77,12 @@ public class Interfaz extends javax.swing.JFrame {
 
         jButton1.setText("Editar");
 
-        jButton2.setText("Limpiar");
+        Limpiar.setText("Limpiar");
+        Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,7 +91,7 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
+                    .addComponent(Limpiar)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -99,7 +104,7 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jButton1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Limpiar)
+                            .addComponent(Eliminar)
                             .addGap(18, 18, 18)
                             .addComponent(Guardar))
                         .addGroup(layout.createSequentialGroup()
@@ -128,10 +133,10 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(IngPse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(Limpiar)
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Limpiar)
+                    .addComponent(Eliminar)
                     .addComponent(Guardar)
                     .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -147,7 +152,8 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_IngDniActionPerformed
 
     private void IngNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngNomActionPerformed
-        String StNom = IngNom.getText();
+
+
 
     }//GEN-LAST:event_IngNomActionPerformed
 
@@ -162,11 +168,22 @@ public class Interfaz extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(rootPane, "Debe ser un numero");
         }
-
+        String StNom = IngNom.getText();
+        if (StNom.matches(".*\\d.*")) { // Verifica si hay algún dígito
+            JOptionPane.showMessageDialog(rootPane, "No debe contener números");
+        } else {
+           System.out.println(StNom);
+        }
     }//GEN-LAST:event_GuardarActionPerformed
 
-    private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
+        IngDni.setText("");
+        IngNom.setText("");
+        IngPse.setText("");
     }//GEN-LAST:event_LimpiarActionPerformed
 
     /**
@@ -174,13 +191,13 @@ public class Interfaz extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Eliminar;
     private javax.swing.JButton Guardar;
     private javax.swing.JTextField IngDni;
     private javax.swing.JTextField IngNom;
     private javax.swing.JTextField IngPse;
     private javax.swing.JButton Limpiar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
