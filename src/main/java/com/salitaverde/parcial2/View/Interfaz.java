@@ -1,17 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package View;
+package com.salitaverde.parcial2.View;
 
-
-
-
-
-/**
- *
- * @author Fabrizio Castillo
- */
 public class Interfaz extends javax.swing.JFrame {
     /**
      * Creates new form Interfaz
@@ -145,6 +133,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void IngDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngDniActionPerformed
         String StDni = IngDni.getText();
+        System.out.println(StDni);
         
         
     }//GEN-LAST:event_IngDniActionPerformed
@@ -159,7 +148,8 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_IngPseActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-
+        String StDni = IngDni.getText();
+        System.out.println(StDni);
         
     }//GEN-LAST:event_GuardarActionPerformed
 
