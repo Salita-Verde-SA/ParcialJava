@@ -49,25 +49,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre");
 
-        jLabel4.setText("Pseudonimo");
-
-        IngDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IngDniActionPerformed(evt);
-            }
-        });
-
-        IngPse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IngPseActionPerformed(evt);
-            }
-        });
-
-        IngNom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IngNomActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("Pseudonimo");        
 
         Guardar.setText("Guardar");
         Guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -166,18 +148,6 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IngDniActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_IngDniActionPerformed
-
-    }// GEN-LAST:event_IngDniActionPerformed
-
-    private void IngNomActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_IngNomActionPerformed
-
-    }// GEN-LAST:event_IngNomActionPerformed
-
-    private void IngPseActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_IngPseActionPerformed
-        String Pseudo = IngPse.getText();
-    }// GEN-LAST:event_IngPseActionPerformed
-
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_GuardarActionPerformed
         try {
             Control.guardar(IngDni, IngNom, IngPse);
@@ -185,7 +155,8 @@ public class Interfaz extends javax.swing.JFrame {
             IngDni.setText("");
             IngPse.setText("");
         } catch (IOException ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            // Esta línea escribe en el log un error grave junto con la información detallada de la excepción, facilitando el diagnóstico del problema.
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex); 
         }
 
     }// GEN-LAST:event_GuardarActionPerformed
