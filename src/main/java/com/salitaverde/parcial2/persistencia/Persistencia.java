@@ -38,7 +38,7 @@ public class Persistencia {
 
     public static void guardarJson(Autor nuevoAutor) {
         ArrayList<Autor> autores = new ArrayList<>();
-        File archivo = new File(UBICACION);
+        File archivo = new File(UBICACION_ARCHIVO);
         boolean archivoExiste = archivo.exists();
 
         if (archivoExiste) {
@@ -50,14 +50,20 @@ public class Persistencia {
                 // Convierte el contenido del archivo JSON a una lista de autores
                 autores = gson.fromJson(lector, listType);
             } catch (JsonSyntaxException e) {
-                System.out.println("El archivo no contenia una lista válida. Se inicializa una nueva.");
+                System.out.println("El archivo no contenía una lista válida. Se inicializa una nueva.");
                 autores = new ArrayList<>();
             } catch (IOException e) {
                 System.err.println("Error al leer el archivo: " + e.getMessage());
             }
         } else {
             System.out.println("El archivo no existe, se crea uno nuevo.");
-            archivo.mkdirs();
+            try {
+                System.out.println(archivo.getParentFile());
+                archivo.getParentFile().mkdir();
+                archivo.createNewFile();
+            } catch (IOException e) {
+                System.err.println("No se pudo crear el archivo: " + e.getMessage());
+            }
         }
 
         for (Autor autor : autores) {
