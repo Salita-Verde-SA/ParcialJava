@@ -35,7 +35,7 @@ public class Interfaz extends javax.swing.JFrame {
         IngPse = new javax.swing.JTextField();
         IngNom = new javax.swing.JTextField();
         Guardar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        Editar = new javax.swing.JButton();
         Limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,7 +62,8 @@ public class Interfaz extends javax.swing.JFrame {
         Guardar.setText("Guardar");
         Guardar.addActionListener(this::GuardarActionPerformed);
 
-        jButton1.setText("Editar");
+        Editar.setText("Editar");
+        Editar.addActionListener(this::EditarActionPerformed);
 
         Limpiar.setText("Limpiar");
         Limpiar.addActionListener(this::LimpiarActionPerformed);
@@ -79,7 +80,7 @@ public class Interfaz extends javax.swing.JFrame {
                         .addComponent(Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
                         .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -118,7 +119,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Guardar)
-                    .addComponent(jButton1))
+                    .addComponent(Editar))
                 .addContainerGap())
         );
 
@@ -143,9 +144,10 @@ public class Interfaz extends javax.swing.JFrame {
 		Control.limpiar(IngDni, IngNom, IngPse);
 	}// GEN-LAST:event_LimpiarActionPerformed
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+	private void EditarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 
 		EditView editView = new EditView();
+		
 		javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) editView.getAutores()
 				.getModel();
 		Control.obtenerDatos(model);
@@ -159,12 +161,12 @@ public class Interfaz extends javax.swing.JFrame {
 	 */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Editar;
     private javax.swing.JButton Guardar;
     private javax.swing.JTextField IngDni;
     private javax.swing.JTextField IngNom;
     private javax.swing.JTextField IngPse;
     private javax.swing.JButton Limpiar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
