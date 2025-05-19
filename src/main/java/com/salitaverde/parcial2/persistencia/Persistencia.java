@@ -50,9 +50,6 @@ public class Persistencia {
 
                 // Convierte el contenido del archivo JSON a una lista de autores
                 autores = gson.fromJson(lector, listType);
-                if (autores == null) {
-                    autores = new ArrayList<>();
-                }
             } catch (JsonSyntaxException e) {
                 System.out.println("El archivo no contenia una lista válida. Se inicializa una nueva.");
                 autores = new ArrayList<>();
