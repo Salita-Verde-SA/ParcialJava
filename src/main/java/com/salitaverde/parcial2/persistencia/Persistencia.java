@@ -30,10 +30,9 @@ public class Persistencia {
 
     public static final String BARRA = File.separator;
 
-    public static final String UBICACION = System.getProperty("user.dir") + BARRA + "Registros" + BARRA;
+    public static final String UBICACION = System.getProperty("user.dir") + BARRA;
 
-    public Persistencia() {
-    }
+    public static final String UBICACION_ARCHIVO = UBICACION + "Datos.json" + BARRA;
 
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
