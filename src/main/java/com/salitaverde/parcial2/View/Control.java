@@ -35,6 +35,7 @@ public class Control {
 
         String pseu = Pse.getText();
         Autor a = new Autor(DNI, StNom, pseu);
+       
         Persistencia.guardarJson(a);
 
     }

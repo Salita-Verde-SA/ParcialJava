@@ -181,6 +181,9 @@ public class Interfaz extends javax.swing.JFrame {
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_GuardarActionPerformed
         try {
             Control.guardar(IngDni, IngNom, IngPse);
+            IngNom.setText("");
+            IngDni.setText("");
+            IngPse.setText("");
         } catch (IOException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
