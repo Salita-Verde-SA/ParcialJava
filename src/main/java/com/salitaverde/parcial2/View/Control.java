@@ -1,21 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.salitaverde.parcial2.View;
 
-import com.salitaverde.parcial2.*;
-import com.salitaverde.parcial2.persistencia.Persistencia;
-import com.salitaverde.parcial2.Autor;
 import java.io.IOException;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import com.salitaverde.parcial2.Autor;
+import com.salitaverde.parcial2.persistencia.Persistencia;
 
 /**
  *
  * @author Fabrizio Castillo
  */
-public class Control extends Interfaz {
+
+public class Control {
 
     public static void guardar(JTextField dni, JTextField Nom, JTextField Pse) throws IOException {
         int DNI;
@@ -24,9 +22,9 @@ public class Control extends Interfaz {
             DNI = Integer.parseInt(dni.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "El DNI debe contener números únicamente.");
-        } finally {
-            DNI = Integer.parseInt(dni.getText());
+            return; // Salir del método si el DNI no es válido
         }
+        System.out.println("DNI: " + dni.getText());
 
         String StNom = Nom.getText();
         if (StNom.matches(".*\\d.*")) { // Verifica si hay algún dígito
