@@ -5,8 +5,9 @@
 package com.salitaverde.parcial2;
 
 //import Logica.Autor;
-import com.salitaverde.parcial2.View.*;
 import java.util.ArrayList;
+
+import com.salitaverde.parcial2.View.Interfaz;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class Parcial2 {
 
     public static void main(String[] args) {
-        ArrayList<Autor> autores = new ArrayList<Autor>();
+        ArrayList<Autor> autores = new ArrayList<>();
         
         Interfaz pantalla = new Interfaz();
         pantalla.setVisible(true);
