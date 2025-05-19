@@ -1,6 +1,7 @@
 package com.salitaverde.parcial2.View;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class Interfaz extends javax.swing.JFrame {
 
@@ -146,13 +147,11 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void IngDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngDniActionPerformed
-        
 
 
     }//GEN-LAST:event_IngDniActionPerformed
 
     private void IngNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngNomActionPerformed
-
 
 
     }//GEN-LAST:event_IngNomActionPerformed
@@ -162,18 +161,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_IngPseActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        try {
-            int dni = Integer.parseInt(IngDni.getText());
-            System.out.println(dni);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(rootPane, "Debe ser un numero");
-        }
-        String StNom = IngNom.getText();
-        if (StNom.matches(".*\\d.*")) { // Verifica si hay algún dígito
-            JOptionPane.showMessageDialog(rootPane, "No debe contener números");
-        } else {
-           System.out.println(StNom);
-        }
+        Control.guardar(IngDni, IngNom, IngPse);
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
@@ -203,4 +191,17 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
+
+    public JTextField getIngDni() {
+        return IngDni;
+    }
+
+    public JTextField getIngNom() {
+        return IngNom;
+    }
+
+    public JTextField getIngPse() {
+        return IngPse;
+    }
+
 }
