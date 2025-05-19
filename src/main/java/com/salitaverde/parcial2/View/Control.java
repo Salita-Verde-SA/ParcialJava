@@ -17,7 +17,7 @@ public class Control {
 
     public static void guardar(JTextField dni, JTextField Nom, JTextField Pse) throws IOException {
         int DNI;
-        
+
         try {
             DNI = Integer.parseInt(dni.getText());
         } catch (NumberFormatException e) {
@@ -34,8 +34,8 @@ public class Control {
         }
 
         String pseu = Pse.getText();
-    Autor a = new Autor(DNI, StNom, pseu);
-    Persistencia.guardarJson(a);
+        Autor a = new Autor(DNI, StNom, pseu);
+        Persistencia.guardarJson(a);
 
     }
 
