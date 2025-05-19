@@ -1,5 +1,8 @@
 package com.salitaverde.parcial2.View;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -150,7 +153,12 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_IngPseActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        Control.guardar(IngDni, IngNom, IngPse);
+        try {
+            Control.guardar(IngDni, IngNom, IngPse);
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed

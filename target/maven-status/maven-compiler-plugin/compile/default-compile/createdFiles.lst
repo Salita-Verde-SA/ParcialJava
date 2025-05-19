@@ -1,8 +1,10 @@
 com\salitaverde\parcial2\Autor.class
 com\salitaverde\parcial2\View\Control.class
 com\salitaverde\parcial2\View\Interfaz$1.class
+com\salitaverde\parcial2\persistencia\Persistencia.class
 com\salitaverde\parcial2\View\Interfaz$4.class
 com\salitaverde\parcial2\Parcial2.class
+com\salitaverde\parcial2\persistencia\Persistencia$1.class
 com\salitaverde\parcial2\Persona.class
 com\salitaverde\parcial2\View\Interfaz$2.class
 com\salitaverde\parcial2\View\Interfaz.class

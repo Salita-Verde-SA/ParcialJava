@@ -6,6 +6,8 @@ package com.salitaverde.parcial2.View;
 
 import com.salitaverde.parcial2.*;
 import com.salitaverde.parcial2.persistencia.Persistencia;
+import com.salitaverde.parcial2.Autor;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -15,7 +17,7 @@ import javax.swing.JTextField;
  */
 public class Control extends Interfaz {
 
-    public static void guardar(JTextField dni, JTextField Nom, JTextField Pse) {
+    public static void guardar(JTextField dni, JTextField Nom, JTextField Pse) throws IOException {
         int DNI;
         
         try {
@@ -34,9 +36,9 @@ public class Control extends Interfaz {
         }
 
         String pseu = Pse.getText();
-        Autor autor = new Autor(DNI, StNom, pseu);
-        
-        Persistencia.guardarJson(autor);
+    Autor a = new Autor(DNI, StNom, pseu);
+    Persistencia.guardarJson(a);
+
     }
 
     public static void limpiar(JTextField dni, JTextField nom, JTextField pse) {
