@@ -18,25 +18,38 @@ public class Control {
     public static void guardar(JTextField dni, JTextField Nom, JTextField Pse) throws IOException {
         int DNI;
 
-        try {
+        try { // Intenta convertir el texto del campo de texto a un número entero
             DNI = Integer.parseInt(dni.getText());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "El DNI debe contener números únicamente.");
+            JOptionPane.showMessageDialog(
+                    null,
+                    "El DNI debe contener números únicamente.",
+                    "DNI inválido",
+                    JOptionPane.WARNING_MESSAGE);
             return; // Salir del método si el DNI no es válido
         }
-        System.out.println("DNI: " + dni.getText());
+        System.out.println("DNI registrado: " + dni.getText());
 
         String StNom = Nom.getText();
         if (StNom.matches(".*\\d.*")) { // Verifica si hay algún dígito
-            JOptionPane.showMessageDialog(null, "En nombre no puede contener números.");
-        } else {
-            System.out.println(StNom);
+            JOptionPane.showMessageDialog(
+                    null, 
+                    "El nombre no puede contener números.",
+                    "Nombre inválido",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
         }
-
+        System.out.println("Nombre registrado: " + StNom);
+        
         String pseu = Pse.getText();
         Autor a = new Autor(DNI, StNom, pseu);
        
         Persistencia.guardarJson(a);
+        JOptionPane.showMessageDialog(
+                    null,
+                    "Se registró el autor correctamente.",
+                    "Registro exitoso",
+                    JOptionPane.INFORMATION_MESSAGE);
 
     }
 
@@ -44,6 +57,14 @@ public class Control {
         dni.setText("");
         nom.setText("");
         pse.setText("");
+    }
+
+    public static void obtenerDatos(javax.swing.table.DefaultTableModel model) {
+        Object [][] datos = Persistencia.obtenerArrayJson();
+        for (Object[] fila : datos) {
+            System.out.println("Fila: " + fila[0] + " " + fila[1] + " " + fila[2]);
+            model.addRow(fila);
+        }
     }
 
 }

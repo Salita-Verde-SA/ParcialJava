@@ -40,32 +40,10 @@ public class Persistencia {
         ArrayList<Autor> autores = new ArrayList<>();
         File archivo = new File(UBICACION_ARCHIVO);
         boolean archivoExiste = archivo.exists();
-
-        if (archivoExiste) {
-            try (Reader lector = new FileReader(archivo)) {
-                // Define el tipo de dato que se va a leer: una lista de autores
-                Type listType = new TypeToken<List<Autor>>() {
-                }.getType();
-
-                // Convierte el contenido del archivo JSON a una lista de autores
-                autores = gson.fromJson(lector, listType);
-            } catch (JsonSyntaxException e) {
-                System.out.println("El archivo no contenía una lista válida. Se inicializa una nueva.");
-                autores = new ArrayList<>();
-            } catch (IOException e) {
-                System.err.println("Error al leer el archivo: " + e.getMessage());
-            }
-        } else {
-            System.out.println("El archivo no existe, se crea uno nuevo.");
-            try {
-                System.out.println(archivo.getParentFile());
-                archivo.getParentFile().mkdir();
-                archivo.createNewFile();
-            } catch (IOException e) {
-                System.err.println("No se pudo crear el archivo: " + e.getMessage());
-            }
-        }
-
+        
+        autores = leer(autores, archivo, archivoExiste);
+        System.out.println(autores.size());
+        
         for (Autor autor : autores) {
             if (autor.getDni() == nuevoAutor.getDni()) {
                 String mensaje = "Ya existe un autor con el mismo DNI: " + nuevoAutor.getDni() + ".";
@@ -87,5 +65,53 @@ public class Persistencia {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    public static Object[][] obtenerArrayJson() {
+        ArrayList<Autor> autores = new ArrayList<>();
+        File archivo = new File(UBICACION_ARCHIVO);
+        boolean archivoExiste = archivo.exists();
+        autores = leer(autores, archivo, archivoExiste);
+
+        Object[][] array = new Object[autores.size()][3];
+
+        for (int i = 0; i < autores.size(); i++) {
+            Autor autor = autores.get(i);
+            array[i][0] = autor.getDni();
+            array[i][1] = autor.getNombre();
+            array[i][2] = autor.getPseudonimo();
+        }
+
+        // array = autores.toArray();
+
+        return array;
+    }
+
+    private static ArrayList<Autor> leer(ArrayList<Autor> autores, File archivo, boolean archivoExiste) {
+        if (archivoExiste) {
+            try (Reader lector = new FileReader(archivo)) {
+                // Define el tipo de dato que se va a leer: una lista de autores
+                Type listType = new TypeToken<List<Autor>>() {
+                }.getType();
+
+                // Convierte el contenido del archivo JSON a una lista de autores
+                autores = gson.fromJson(lector, listType);
+            } catch (JsonSyntaxException e) {
+                System.out.println("El archivo no contiene una lista válida. Se inicializa una nueva.");
+                autores = new ArrayList<>();
+            } catch (IOException e) {
+                System.err.println("Error al leer el archivo: " + e.getMessage());
+            }
+        } else {
+            System.out.println("El archivo no existe, se crea uno nuevo.");
+            try {
+                System.out.println(archivo.getParentFile());
+                archivo.getParentFile().mkdir();
+                archivo.createNewFile();
+            } catch (IOException e) {
+                System.err.println("No se pudo crear el archivo: " + e.getMessage());
+            }
+        }
+        return autores;
     }
 }

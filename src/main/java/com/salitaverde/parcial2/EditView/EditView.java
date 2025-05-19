@@ -24,7 +24,7 @@ public class EditView extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -32,44 +32,44 @@ public class EditView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar autores");
-
-        jScrollPane1.addContainerListener(new java.awt.event.ContainerAdapter() {
-            @Override
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                jScrollPane1ComponentAdded(evt);
-            }
-        });
+        setType(java.awt.Window.Type.UTILITY);
 
         Autores.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[0][3],
-                new String[] {
-                        "DNI", "Nombre", "Pseudónimo"
-                }) {
-            Class[] types = new Class[] {
-                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            new Object [][] {
+
+            },
+            new String [] {
+                "DNI", "Nombre", "Pseudónimo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
-            @Override
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
         });
+        Autores.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(Autores);
+        Autores.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                .addContainerGap())
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -98,7 +98,7 @@ public class EditView extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("System".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -118,25 +118,9 @@ public class EditView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                // Esto nunca se va a ejecutar
                 EditView view = new EditView();
-                // view.agregar();
-                javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) view.Autores
-                        .getModel();
-                // Ejemplo de datos
-                Object[][] datos = {
-                { 12345678, "Juan Pérez", "JPerez" },
-                { 87654321, "María Gómez", "MGomez" },
-                { 11223344, "Carlos Ruiz", "CRuiz" }
-                };
-                for (Object[] fila : datos) {
-                model.addRow(fila);
-                }
-
-                // javax.swing.table.DefaultTableModel model =
-                // (javax.swing.table.DefaultTableModel) view.Autores.getModel();
-                // Los datos ya se agregan con view.agregar(), no es necesario agregar más aquí.
-                // Si necesitas agregar otra fila manualmente:
-                model.addRow(new Object[] { 44556677, "Ana López", "ALopez" });
+                view.setLocationRelativeTo(null);               
                 view.setVisible(true);
             }
         });
