@@ -14,6 +14,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -36,13 +38,16 @@ public class Persistencia {
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static void guardarJson(Autor nuevoAutor) {
-        List<Autor> autores = new ArrayList<>();
+        ArrayList<Autor> autores = new ArrayList<>();
         File archivo = new File(UBICACION);
-        if (archivo.exists()) {
+        boolean archivoExiste = archivo.exists();
+
+        if (archivoExiste) {
             try (Reader lector = new FileReader(archivo)) {
                 // Define el tipo de dato que se va a leer: una lista de autores
                 Type listType = new TypeToken<List<Autor>>() {
                 }.getType();
+
                 // Convierte el contenido del archivo JSON a una lista de autores
                 autores = gson.fromJson(lector, listType);
                 if (autores == null) {
@@ -55,7 +60,21 @@ public class Persistencia {
                 System.err.println("Error al leer el archivo: " + e.getMessage());
             }
         } else {
+            System.out.println("El archivo no existe, se crea uno nuevo.");
             archivo.mkdirs();
+        }
+
+        for (Autor autor : autores) {
+            if (autor.getDni() == nuevoAutor.getDni()) {
+                String mensaje = "Ya existe un autor con el mismo DNI: " + nuevoAutor.getDni() + ".";
+                System.err.println(mensaje);
+                JOptionPane.showMessageDialog(
+                        null,
+                        mensaje,
+                        "El autor ya existe",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
 
         autores.add(nuevoAutor);
@@ -65,7 +84,6 @@ public class Persistencia {
             gson.toJson(autores, escritor);
         } catch (IOException e) {
             System.err.println(e.getMessage());
-
         }
     }
 }
