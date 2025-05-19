@@ -5,11 +5,11 @@
 package com.salitaverde.parcial2.persistencia;
 
 import com.salitaverde.parcial2.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
+//import com.google.gson.GsonBuilder;
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
+//import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
@@ -50,9 +50,10 @@ public class Persistencia {
             System.out.println("El archivo no contenia una lista válida. Se inicializa una nueva.");
             autores = new ArrayList<>();
         } catch (IOException e) {
-            
             e.printStackTrace();
         }
+    } else {
+        archivo.mkdirs();
     }
 
     autores.add(nuevoAutor);
