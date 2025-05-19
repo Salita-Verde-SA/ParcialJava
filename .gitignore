@@ -44,6 +44,6 @@ Thumbs.db
 ########
 *.lst
 *.class
-target/
+target/*
 Registros
 Datos.json
