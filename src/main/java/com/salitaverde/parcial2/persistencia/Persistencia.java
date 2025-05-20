@@ -40,8 +40,6 @@ public class Persistencia {
 
         autores = leer(autores, archivo, archivoExiste);
 
-        System.out.println(autores.size());
-
         for (Autor autor : autores) {
             if (autor.getDni() == nuevoAutor.getDni()) {
                 String mensaje = "Ya existe un autor con el mismo DNI: " + nuevoAutor.getDni() + ".";
@@ -78,6 +76,7 @@ public class Persistencia {
 
         autores = leer(autores, archivo, archivoExiste);
 
+        // Comprobar DNI repetido
         // Crea un HashSet para almacenar los DNIs y detectar duplicados
         java.util.HashSet<Integer> dnis = new java.util.HashSet<>();
         // Itera sobre la colección de autores llamada nuevoAutor

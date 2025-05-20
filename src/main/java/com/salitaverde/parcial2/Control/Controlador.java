@@ -13,10 +13,9 @@ import com.salitaverde.parcial2.persistencia.Persistencia;
  *
  * @author Fabrizio Castillo
  */
-
 public class Controlador {
 
-    public static void guardar(JTextField dni, JTextField Nom, JTextField Pse) throws IOException {
+    public static void guardar(JTextField dni, JTextField Nom, JTextField Pse) {
         int DNI;
 
         try { // Intenta convertir el texto del campo de texto a un número entero
@@ -46,7 +45,6 @@ public class Controlador {
         Autor a = new Autor(DNI, StNom, pseu);
 
         Persistencia.guardarJson(a);
-        
 
     }
 
@@ -67,27 +65,27 @@ public class Controlador {
         java.util.ArrayList<Autor> lista = new java.util.ArrayList<>();
         for (int i = 0; i < model.getRowCount(); i++) {
             try {
-            int dni = Integer.parseInt(model.getValueAt(i, 0).toString());
-            String nombre = model.getValueAt(i, 1).toString();
-            String pseudonimo = model.getValueAt(i, 2).toString();
-            if (nombre.matches(".*\\d.*")) { // Verifica si hay algún dígito
-            JOptionPane.showMessageDialog(
-                    null,
-                    "El nombre no puede contener números.",
-                    "Nombre inválido",
-                    JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-            lista.add(new Autor(dni, nombre, pseudonimo));
+                int dni = Integer.parseInt(model.getValueAt(i, 0).toString());
+                String nombre = model.getValueAt(i, 1).toString();
+                String pseudonimo = model.getValueAt(i, 2).toString();
+                if (nombre.matches(".*\\d.*")) { // Verifica si hay algún dígito
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "El nombre no puede contener números.",
+                            "Nombre inválido",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                lista.add(new Autor(dni, nombre, pseudonimo));
             } catch (NullPointerException e) {
                 JOptionPane.showMessageDialog(
-                        vistaEdicion, 
-                        "Algún dato de los ingresados es inválido o nulo.", 
+                        vistaEdicion,
+                        "Algún dato de los ingresados es inválido o nulo.",
                         "No se pudieron guardar los datos",
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
         }
         Persistencia.guardarJson(lista);
         vistaEdicion.dispose();
