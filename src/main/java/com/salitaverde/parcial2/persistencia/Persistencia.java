@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.salitaverde.parcial2.persistencia;
 
 import java.io.File;
@@ -40,10 +36,10 @@ public class Persistencia {
         ArrayList<Autor> autores = new ArrayList<>();
         File archivo = new File(UBICACION_ARCHIVO);
         boolean archivoExiste = archivo.exists();
-        
+
         autores = leer(autores, archivo, archivoExiste);
         System.out.println(autores.size());
-        
+
         for (Autor autor : autores) {
             if (autor.getDni() == nuevoAutor.getDni()) {
                 String mensaje = "Ya existe un autor con el mismo DNI: " + nuevoAutor.getDni() + ".";
@@ -62,6 +58,43 @@ public class Persistencia {
         try (Writer escritor = new FileWriter(archivo)) {
             // Convierte la lista de autores a JSON y la guarda en el archivo
             gson.toJson(autores, escritor);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void guardarJson(ArrayList<Autor> nuevoAutor) {
+        ArrayList<Autor> autores = new ArrayList<>();
+        File archivo = new File(UBICACION_ARCHIVO);
+        boolean archivoExiste = archivo.exists();
+
+        autores = leer(autores, archivo, archivoExiste);
+        System.out.println(autores.size());
+
+        // Crea un HashSet para almacenar los DNIs y detectar duplicados
+        java.util.HashSet<Integer> dnis = new java.util.HashSet<>(); 
+        // Itera sobre la colección de autores llamada nuevoAutor
+        for (Autor autor : nuevoAutor) {
+            // Intenta agregar el DNI del autor al HashSet; si ya existe, retorna false
+            if (!dnis.add(autor.getDni())) {
+                // Prepara un mensaje indicando que hay un DNI duplicado
+                String mensaje = "Hay autores duplicados con el mismo DNI: " + autor.getDni() + ".";
+                // Muestra el mensaje de error en la consola
+                System.err.println(mensaje);
+                // Muestra un cuadro de diálogo de error al usuario
+                JOptionPane.showMessageDialog(
+                        null,
+                        mensaje,
+                        "Autores duplicados",
+                        JOptionPane.ERROR_MESSAGE);
+                // Sale del método para evitar continuar con datos duplicados
+                return;
+            }
+        }
+
+        try (Writer escritor = new FileWriter(archivo)) {
+            // Convierte la lista de autores a JSON y la guarda en el archivo
+            gson.toJson(nuevoAutor, escritor);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

@@ -1,20 +1,20 @@
 package com.salitaverde.parcial2.View;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JTextField;
 
+import com.salitaverde.parcial2.Control.Controlador;
 import com.salitaverde.parcial2.EditView.EditView;
 
-public class Interfaz extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame {
 
 	/**
 	 * Creates new form Interfaz
 	 */
-	public Interfaz() {
+	public View() {
 		initComponents();
 	}
 
@@ -52,12 +52,6 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel3.setText("Nombre");
 
         jLabel4.setText("Pseudonimo");
-
-        IngDni.addActionListener(this::IngDniActionPerformed);
-
-        IngPse.addActionListener(this::IngPseActionPerformed);
-
-        IngNom.addActionListener(this::IngNomActionPerformed);
 
         Guardar.setText("Guardar");
         Guardar.addActionListener(this::GuardarActionPerformed);
@@ -128,29 +122,29 @@ public class Interfaz extends javax.swing.JFrame {
 
 	private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_GuardarActionPerformed
 		try {
-			Control.guardar(IngDni, IngNom, IngPse);
+			Controlador.guardar(IngDni, IngNom, IngPse);
             IngNom.setText("");
             IngDni.setText("");
             IngPse.setText("");
 		} catch (IOException ex) {
 			// Esta línea escribe en el log un error grave junto con la información
 			// detallada de la excepción, facilitando el diagnóstico del problema.
-			Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 	}// GEN-LAST:event_GuardarActionPerformed
 
 	private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_LimpiarActionPerformed
-		Control.limpiar(IngDni, IngNom, IngPse);
+		Controlador.limpiar(IngDni, IngNom, IngPse);
 	}// GEN-LAST:event_LimpiarActionPerformed
 
 	private void EditarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 
 		EditView editView = new EditView();
-		
+
 		javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) editView.getAutores()
 				.getModel();
-		Control.obtenerDatos(model);
+		Controlador.obtenerDatos(model);
 
 		editView.setLocationRelativeTo(this);
 		editView.setVisible(true);
@@ -184,17 +178,5 @@ public class Interfaz extends javax.swing.JFrame {
 	public JTextField getIngPse() {
 		return IngPse;
 	}
-
-    private void IngNomActionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    private void IngPseActionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    private void IngDniActionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
 }
