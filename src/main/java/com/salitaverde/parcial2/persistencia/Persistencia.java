@@ -29,7 +29,7 @@ public class Persistencia {
 
     public static final String UBICACION = System.getProperty("user.dir") + BARRA;
 
-    public static final String UBICACION_ARCHIVO = UBICACION + "Datos.json" + BARRA;
+    public static final String UBICACION_ARCHIVO = UBICACION + "Datos.json";
 
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -39,6 +39,8 @@ public class Persistencia {
         boolean archivoExiste = archivo.exists();
 
         autores = leer(autores, archivo, archivoExiste);
+
+        System.out.println(autores.size());
 
         for (Autor autor : autores) {
             if (autor.getDni() == nuevoAutor.getDni()) {
@@ -61,9 +63,15 @@ public class Persistencia {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
+        
+        JOptionPane.showMessageDialog(
+                null,
+                "Se registró el autor correctamente.",
+                "Registro exitoso",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public static void guardarJson(EditView vistaEdicion, ArrayList<Autor> nuevoAutor) {
+    public static void guardarJson(ArrayList<Autor> nuevoAutor) {
         ArrayList<Autor> autores = new ArrayList<>();
         File archivo = new File(UBICACION_ARCHIVO);
         boolean archivoExiste = archivo.exists();
@@ -102,7 +110,7 @@ public class Persistencia {
                     "Datos actualizados correctamente.",
                     "DNI inválido",
                     JOptionPane.INFORMATION_MESSAGE);
-            vistaEdicion.dispose();
+            
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -124,26 +132,11 @@ public class Persistencia {
         }
 
         // array = autores.toArray();
-
         return array;
     }
 
     private static ArrayList<Autor> leer(ArrayList<Autor> autores, File archivo, boolean archivoExiste) {
-        if (archivoExiste) {
-            try (Reader lector = new FileReader(archivo)) {
-                // Define el tipo de dato que se va a leer: una lista de autores
-                Type listType = new TypeToken<List<Autor>>() {
-                }.getType();
-
-                // Convierte el contenido del archivo JSON a una lista de autores
-                autores = gson.fromJson(lector, listType);
-            } catch (JsonSyntaxException e) {
-                System.out.println("El archivo no contiene una lista válida. Se inicializa una nueva.");
-                autores = new ArrayList<>();
-            } catch (IOException e) {
-                System.err.println("Error al leer el archivo: " + e.getMessage());
-            }
-        } else {
+        if (!archivoExiste) {
             System.out.println("El archivo no existe, se crea uno nuevo.");
             try {
                 archivo.getParentFile().mkdir();
@@ -152,6 +145,29 @@ public class Persistencia {
                 System.err.println("No se pudo crear el archivo: " + e.getMessage());
             }
         }
+        try (Reader lector = new FileReader(archivo)) {
+            // Define el tipo de dato que se va a leer: una lista de autores
+            Type listType = new TypeToken<List<Autor>>() {
+            }.getType();
+
+            // Convierte el contenido del archivo JSON a una lista de autores
+            ArrayList<Autor> json;
+            json = gson.fromJson(lector, listType);
+
+            if (json == null) {
+                return autores;
+            } else {
+                autores = json;
+            }
+
+        } catch (JsonSyntaxException e) {
+            System.out.println("El archivo no contiene una lista válida. Se inicializa una nueva.");
+            autores = new ArrayList<>();
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+
+        }
         return autores;
+
     }
 }

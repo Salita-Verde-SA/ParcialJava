@@ -46,11 +46,7 @@ public class Controlador {
         Autor a = new Autor(DNI, StNom, pseu);
 
         Persistencia.guardarJson(a);
-        JOptionPane.showMessageDialog(
-                null,
-                "Se registró el autor correctamente.",
-                "Registro exitoso",
-                JOptionPane.INFORMATION_MESSAGE);
+        
 
     }
 
@@ -70,14 +66,31 @@ public class Controlador {
     public static void guardarDesdeTabla(EditView vistaEdicion, javax.swing.table.DefaultTableModel model) {
         java.util.ArrayList<Autor> lista = new java.util.ArrayList<>();
         for (int i = 0; i < model.getRowCount(); i++) {
+            try {
             int dni = Integer.parseInt(model.getValueAt(i, 0).toString());
             String nombre = model.getValueAt(i, 1).toString();
             String pseudonimo = model.getValueAt(i, 2).toString();
-            lista.add(new Autor(dni, nombre, pseudonimo));
+            if (nombre.matches(".*\\d.*")) { // Verifica si hay algún dígito
+            JOptionPane.showMessageDialog(
+                    null,
+                    "El nombre no puede contener números.",
+                    "Nombre inválido",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
         }
-
-        Persistencia.guardarJson(vistaEdicion, lista);
-
+            lista.add(new Autor(dni, nombre, pseudonimo));
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(
+                        vistaEdicion, 
+                        "Algún dato de los ingresados es inválido o nulo.", 
+                        "No se pudieron guardar los datos",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+        }
+        Persistencia.guardarJson(lista);
+        vistaEdicion.dispose();
     }
 
 }
