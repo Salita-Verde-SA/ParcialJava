@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.salitaverde.parcial2.Autor;
+import com.salitaverde.parcial2.EditView.EditView;
 import com.salitaverde.parcial2.persistencia.Persistencia;
 
 /**
@@ -33,23 +34,23 @@ public class Controlador {
         String StNom = Nom.getText();
         if (StNom.matches(".*\\d.*")) { // Verifica si hay algún dígito
             JOptionPane.showMessageDialog(
-                    null, 
+                    null,
                     "El nombre no puede contener números.",
                     "Nombre inválido",
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
         System.out.println("Nombre registrado: " + StNom);
-        
+
         String pseu = Pse.getText();
         Autor a = new Autor(DNI, StNom, pseu);
 
         Persistencia.guardarJson(a);
         JOptionPane.showMessageDialog(
-                    null,
-                    "Se registró el autor correctamente.",
-                    "Registro exitoso",
-                    JOptionPane.INFORMATION_MESSAGE);
+                null,
+                "Se registró el autor correctamente.",
+                "Registro exitoso",
+                JOptionPane.INFORMATION_MESSAGE);
 
     }
 
@@ -60,14 +61,13 @@ public class Controlador {
     }
 
     public static void obtenerDatos(javax.swing.table.DefaultTableModel model) {
-        Object [][] datos = Persistencia.obtenerArrayJson();
+        Object[][] datos = Persistencia.obtenerArrayJson();
         for (Object[] fila : datos) {
-            // System.out.println("Fila: " + fila[0] + " " + fila[1] + " " + fila[2]);
             model.addRow(fila);
         }
     }
 
-    public static void guardarDesdeTabla(javax.swing.table.DefaultTableModel model) {
+    public static void guardarDesdeTabla(EditView vistaEdicion, javax.swing.table.DefaultTableModel model) {
         java.util.ArrayList<Autor> lista = new java.util.ArrayList<>();
         for (int i = 0; i < model.getRowCount(); i++) {
             int dni = Integer.parseInt(model.getValueAt(i, 0).toString());
@@ -75,10 +75,9 @@ public class Controlador {
             String pseudonimo = model.getValueAt(i, 2).toString();
             lista.add(new Autor(dni, nombre, pseudonimo));
         }
-        Persistencia.guardarJson(lista);
 
-        // Aquí puedes agregar lógica adicional si es necesario
-        // Ahora puedes usar 'lista' según lo que necesites (por ejemplo, guardarla en persistencia)
+        Persistencia.guardarJson(vistaEdicion, lista);
+
     }
 
 }

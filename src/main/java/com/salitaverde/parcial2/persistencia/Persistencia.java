@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.salitaverde.parcial2.Autor;
+import com.salitaverde.parcial2.EditView.EditView;
 
 /**
  *
@@ -38,7 +39,6 @@ public class Persistencia {
         boolean archivoExiste = archivo.exists();
 
         autores = leer(autores, archivo, archivoExiste);
-        System.out.println(autores.size());
 
         for (Autor autor : autores) {
             if (autor.getDni() == nuevoAutor.getDni()) {
@@ -63,16 +63,15 @@ public class Persistencia {
         }
     }
 
-    public static void guardarJson(ArrayList<Autor> nuevoAutor) {
+    public static void guardarJson(EditView vistaEdicion, ArrayList<Autor> nuevoAutor) {
         ArrayList<Autor> autores = new ArrayList<>();
         File archivo = new File(UBICACION_ARCHIVO);
         boolean archivoExiste = archivo.exists();
 
         autores = leer(autores, archivo, archivoExiste);
-        System.out.println(autores.size());
 
         // Crea un HashSet para almacenar los DNIs y detectar duplicados
-        java.util.HashSet<Integer> dnis = new java.util.HashSet<>(); 
+        java.util.HashSet<Integer> dnis = new java.util.HashSet<>();
         // Itera sobre la colección de autores llamada nuevoAutor
         for (Autor autor : nuevoAutor) {
             // Intenta agregar el DNI del autor al HashSet; si ya existe, retorna false
@@ -92,9 +91,18 @@ public class Persistencia {
             }
         }
 
+        autores.clear();
+        autores.addAll(nuevoAutor);
+
         try (Writer escritor = new FileWriter(archivo)) {
             // Convierte la lista de autores a JSON y la guarda en el archivo
-            gson.toJson(nuevoAutor, escritor);
+            gson.toJson(autores, escritor);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Datos actualizados correctamente.",
+                    "DNI inválido",
+                    JOptionPane.INFORMATION_MESSAGE);
+            vistaEdicion.dispose();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -138,7 +146,6 @@ public class Persistencia {
         } else {
             System.out.println("El archivo no existe, se crea uno nuevo.");
             try {
-                System.out.println(archivo.getParentFile());
                 archivo.getParentFile().mkdir();
                 archivo.createNewFile();
             } catch (IOException e) {

@@ -17,10 +17,10 @@ public class Parcial2 {
 
     public static void main(String[] args) {
         ArrayList<Autor> autores = new ArrayList<>();
-        
+
         View pantalla = new View();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
-        
+
     }
 }

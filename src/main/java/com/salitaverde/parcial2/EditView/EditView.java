@@ -98,7 +98,7 @@ public class EditView extends javax.swing.JFrame {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_guardarActionPerformed
         javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) this.getAutores().getModel();
-        Controlador.guardarDesdeTabla(model);
+        Controlador.guardarDesdeTabla(this, model);
     }// GEN-LAST:event_guardarActionPerformed
 
     private void jScrollPane1ComponentAdded(java.awt.event.ContainerEvent evt) {// GEN-FIRST:event_jScrollPane1ComponentAdded
