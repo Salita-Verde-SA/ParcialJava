@@ -46,4 +46,4 @@ Thumbs.db
 *.class
 target/*
 Registros
-Datos.json
+*.json
