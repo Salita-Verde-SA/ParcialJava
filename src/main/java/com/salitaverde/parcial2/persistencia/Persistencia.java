@@ -162,11 +162,11 @@ public class Persistencia {
             // Define el tipo de dato que se va a leer: una lista de autores
             Type listType = new TypeToken<List<Autor>>() {
             }.getType();
-// Lee el contenido del archivo JSON y lo convierte en una lista de autores
+            // Lee el contenido del archivo JSON y lo convierte en una lista de autores
             // Convierte el contenido del archivo JSON a una lista de autores
             ArrayList<Autor> json;
             json = gson.fromJson(lector, listType);
-// Si el archivo está vacío o contiene null, devuelve la lista original (vacía)
+            // Si el archivo está vacío o contiene null, devuelve la lista original (vacía)
             if (json == null) {
                 return autores;
             } else {
