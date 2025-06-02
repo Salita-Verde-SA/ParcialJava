@@ -7,11 +7,13 @@ import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 import com.salitaverde.parcial2.Control.Controlador;
+import static com.salitaverde.parcial2.Control.Controlador.mostrarVistaEditar;
 import com.salitaverde.parcial2.EditView.EditView;
 
 public class View extends javax.swing.JFrame {
 
     public static EditView editView = new EditView();
+    
     public View() {
         initComponents();
     }
@@ -183,16 +185,8 @@ public class View extends javax.swing.JFrame {
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 //Se crea una nueva instancia de la ventana de edición (EditView)
-        
-// Se obtiene el modelo de la tabla de autores de la ventana
-        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) editView.getAutores()
-                .getModel();
-        //Se cargan los datos en el modelo de la tabla usando un método del controlador
-        Controlador.obtenerDatos(model);
-//Se posiciona la ventana de edición en el centro de la ventana actual (this)
-        editView.setLocationRelativeTo(this);
-        //Se hace visible la ventana de edición
-        editView.setVisible(true);
+        mostrarVistaEditar(this, editView);
+
     }// GEN-LAST:event_jButton1ActionPerformed
 
     /**

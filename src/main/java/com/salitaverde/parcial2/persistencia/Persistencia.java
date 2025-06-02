@@ -120,8 +120,9 @@ public class Persistencia {
 // Método que convierte la lista de autores del 
 //archivo en una matriz de objetos para usar en tablas
     public static Object[][] obtenerArrayJson() {
+        ArrayList<Autor> autores = null;
         // Se crea una lista vacía de autores
-        ArrayList<Autor> autores = new ArrayList<>();
+        autores = new ArrayList<>();
         // Se accede al archivo donde están almacenados los autores
         File archivo = new File(UBICACION_ARCHIVO);
         // Se verifica si el archivo existe
