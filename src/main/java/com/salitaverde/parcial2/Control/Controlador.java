@@ -49,14 +49,10 @@ public class Controlador {
 
         String StNom = Nom.getText();
         // Verifica que el nombre no contenga números
-        if (StNom.matches(".*\\d.*")) { // Verifica si hay algún dígito
-            JOptionPane.showMessageDialog(
-                    null,
-                    "El nombre no puede contener números.",
-                    "Nombre inválido",
-                    JOptionPane.WARNING_MESSAGE);
+        if (comprobarTextoVacio(StNom)) {
             return;
         }
+        
         System.out.println("Nombre registrado: " + StNom);
 // Toma el seudónimo del campo
         String pseu = Pse.getText();
@@ -65,6 +61,18 @@ public class Controlador {
 // Llama al método para guardar el autor en un archivo JSON
         Persistencia.guardarJson(a);
 
+    }
+    
+    private static boolean comprobarTextoVacio(String nombre) {
+        if (nombre.matches(".*\\d.*") || nombre.equals("")) { // Verifica el nombre
+            JOptionPane.showMessageDialog(
+                    null,
+                    "El nombre no puede contener números o estar vacío.",
+                    "Nombre inválido",
+                    JOptionPane.WARNING_MESSAGE);
+            return true;
+        }
+        return false;
     }
 // Método para limpiar los campos de texto
 
@@ -95,12 +103,7 @@ public class Controlador {
                 String nombre = model.getValueAt(i, 1).toString();
                 String pseudonimo = model.getValueAt(i, 2).toString();
 
-                if (nombre.matches(".*\\d.*")) { // Verifica si hay algún dígito
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "El nombre no puede contener números.",
-                            "Nombre inválido",
-                            JOptionPane.WARNING_MESSAGE);
+                if (comprobarTextoVacio(nombre)) { // Verificar el nombre
                     return;
                 }
                 // Si todo es válido, se crea el Autor y se agrega a la lista
