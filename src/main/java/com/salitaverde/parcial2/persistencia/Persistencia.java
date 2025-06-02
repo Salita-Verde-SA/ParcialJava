@@ -109,7 +109,7 @@ public class Persistencia {
             JOptionPane.showMessageDialog(
                     null,
                     "Datos actualizados correctamente.",
-                    "DNI inválido",// Este título parece incorrecto, podría corregirse
+                    "Operación exitosa",
                     JOptionPane.INFORMATION_MESSAGE);
             
         } catch (IOException e) {
