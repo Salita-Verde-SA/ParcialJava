@@ -174,7 +174,7 @@ public class View extends javax.swing.JFrame {
             Controlador.guardar(IngDni, IngNom, IngPse);
             Controlador.limpiar(IngDni, IngNom, IngPse);
         } catch (Exception e) {
-            System.err.println("Error:" + e);
+            System.err.println("Error:" + e.getMessage());
         }
 
     }// GEN-LAST:event_GuardarActionPerformed
