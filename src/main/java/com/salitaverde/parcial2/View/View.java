@@ -184,14 +184,16 @@ public class View extends javax.swing.JFrame {
     }// GEN-LAST:event_LimpiarActionPerformed
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-
+//Se crea una nueva instancia de la ventana de edición (EditView)
         EditView editView = new EditView();
-
+// Se obtiene el modelo de la tabla de autores de la ventana
         javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) editView.getAutores()
                 .getModel();
+        //Se cargan los datos en el modelo de la tabla usando un método del controlador
         Controlador.obtenerDatos(model);
-
+//Se posiciona la ventana de edición en el centro de la ventana actual (this)
         editView.setLocationRelativeTo(this);
+        //Se hace visible la ventana de edición
         editView.setVisible(true);
     }// GEN-LAST:event_jButton1ActionPerformed
 

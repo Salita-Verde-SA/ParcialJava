@@ -97,32 +97,40 @@ public class Persistencia {
                 return;
             }
         }
-
+        // Limpia la lista de autores actual
         autores.clear();
+        // Agrega todos los autores nuevos a la lista
         autores.addAll(nuevoAutor);
 
         try (Writer escritor = new FileWriter(archivo)) {
             // Convierte la lista de autores a JSON y la guarda en el archivo
             gson.toJson(autores, escritor);
+            // Muestra un mensaje indicando que los datos fueron actualizados
             JOptionPane.showMessageDialog(
                     null,
                     "Datos actualizados correctamente.",
-                    "DNI inválido",
+                    "DNI inválido",// Este título parece incorrecto, podría corregirse
                     JOptionPane.INFORMATION_MESSAGE);
             
         } catch (IOException e) {
+            // Si ocurre un error al escribir el archivo, se muestra el mensaje de error en consola
             System.err.println(e.getMessage());
         }
     }
-
+// Método que convierte la lista de autores del 
+//archivo en una matriz de objetos para usar en tablas
     public static Object[][] obtenerArrayJson() {
+        // Se crea una lista vacía de autores
         ArrayList<Autor> autores = new ArrayList<>();
+        // Se accede al archivo donde están almacenados los autores
         File archivo = new File(UBICACION_ARCHIVO);
+        // Se verifica si el archivo existe
         boolean archivoExiste = archivo.exists();
+            // Se leen los datos del archivo y se actualiza la lista de autores
         autores = leer(autores, archivo, archivoExiste);
-
+    // Se crea una matriz de tamaño [cantidad de autores][3 columnas: dni, nombre, pseudónimo]
         Object[][] array = new Object[autores.size()][3];
-
+    // Se cargan los datos en la matriz
         for (int i = 0; i < autores.size(); i++) {
             Autor autor = autores.get(i);
             array[i][0] = autor.getDni();
@@ -131,16 +139,21 @@ public class Persistencia {
         }
 
         // array = autores.toArray();
+            // Se devuelve la matriz con los datos
         return array;
     }
-
+// Método privado que lee autores desde un archivo JSON
     private static ArrayList<Autor> leer(ArrayList<Autor> autores, File archivo, boolean archivoExiste) {
+            // Si el archivo no existe, se intenta crear uno nuevo
         if (!archivoExiste) {
             System.out.println("El archivo no existe, se crea uno nuevo.");
             try {
+                // Crea los directorios necesarios
                 archivo.getParentFile().mkdir();
+                // Crea el archivo vacío
                 archivo.createNewFile();
             } catch (IOException e) {
+                // Muestra un error si no se pudo crear el archivo
                 System.err.println("No se pudo crear el archivo: " + e.getMessage());
             }
         }
@@ -148,24 +161,27 @@ public class Persistencia {
             // Define el tipo de dato que se va a leer: una lista de autores
             Type listType = new TypeToken<List<Autor>>() {
             }.getType();
-
+// Lee el contenido del archivo JSON y lo convierte en una lista de autores
             // Convierte el contenido del archivo JSON a una lista de autores
             ArrayList<Autor> json;
             json = gson.fromJson(lector, listType);
-
+// Si el archivo está vacío o contiene null, devuelve la lista original (vacía)
             if (json == null) {
                 return autores;
             } else {
+           // Si la lectura fue exitosa, asigna la lista leída
                 autores = json;
             }
 
         } catch (JsonSyntaxException e) {
+            // Si el contenido del archivo no es válido JSON, se reinicia la lista
             System.out.println("El archivo no contiene una lista válida. Se inicializa una nueva.");
             autores = new ArrayList<>();
         } catch (IOException e) {
+            // Si ocurre un error al leer el archivo, se muestra por consola
             System.err.println("Error al leer el archivo: " + e.getMessage());
-
         }
+         // Devuelve la lista de autores, ya sea vacía o cargada
         return autores;
 
     }
