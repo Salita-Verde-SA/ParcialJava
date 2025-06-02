@@ -11,9 +11,7 @@ import com.salitaverde.parcial2.EditView.EditView;
 
 public class View extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Interfaz
-     */
+    public static EditView editView = new EditView();
     public View() {
         initComponents();
     }
@@ -185,7 +183,7 @@ public class View extends javax.swing.JFrame {
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 //Se crea una nueva instancia de la ventana de edición (EditView)
-        EditView editView = new EditView();
+        
 // Se obtiene el modelo de la tabla de autores de la ventana
         javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) editView.getAutores()
                 .getModel();
